@@ -1,0 +1,65 @@
+﻿@page
+@model WesternInn_TM_KT_RR.Pages.Guests.CalcPostCodeStatsModel
+@{
+    ViewData["Title"] = "Calculate PostCode Statistics";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h2>Guest distribution with respect to postcodes</h2>
+<br />
+
+<div>
+    @* .table is a Bootstrap class giving table styles *@
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(m => m.PostCodeStatistics[0].postCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m.PostCodeStatistics[0].NumOfGuests)
+            </th>
+        </tr>
+
+        @foreach (var item in Model.PostCodeStatistics)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.postCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumOfGuests)
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+<h2>Booking distribution with respect to rooms</h2>
+<br />
+
+<div>
+    @* .table is a Bootstrap class giving table styles *@
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(x => x.RoomBookingStatistics[0].RoomID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => x.RoomBookingStatistics[0].NumOfBookings)
+            </th>
+        </tr>
+
+        @foreach (var item in Model.RoomBookingStatistics)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoomID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumOfBookings)
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+

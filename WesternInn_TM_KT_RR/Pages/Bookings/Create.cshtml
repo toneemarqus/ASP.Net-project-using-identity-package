@@ -1,0 +1,112 @@
+﻿@page
+@model WesternInn_TM_KT_RR.Pages.Bookings.CreateModel
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Create";
+    ViewData["email"] = UserManager.GetUserName(User);
+}
+
+<h1>Create</h1>
+
+<h4>Booking</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (Model.ID > 0)
+            {
+                <div class="form-group">
+                    <label asp-for="Booking.RoomID" class="control-label"></label>
+                    <input asp-for="Booking.RoomID" class="form-control" value=@Model.ID />
+                </div>
+               
+                <div class="form-group">
+                    <label asp-for="Booking.CheckIn" class="control-label"></label>
+                    <input asp-for="Booking.CheckIn" class="form-control" type="datetime" value=@Model.Indate />
+                    <span asp-validation-for="Booking.CheckIn" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Booking.CheckOut" class="control-label"></label>
+                    <input asp-for="Booking.CheckOut" class="form-control" type="datetime" value="@Model.Outdate" />
+                    <span asp-validation-for="Booking.CheckOut" class="text-danger"></span>
+                </div>
+               <div class="form-group m-2">
+                @* <label asp-for="Order.TotalPrice" class="control-label"></label> *@
+                @* Make the type "hidden", and the value = 0 to be in the valid range. *@
+                    <input type="hidden" asp-for="Booking.TotalPrice" value="136" class="form-control" />
+                @* <span asp-validation-for="Order.TotalPrice" class="text-danger"></span> *@
+            </div>
+             <div class="form-group">
+
+                    <input type="hidden" asp-for="Booking.GuestEmail" value=@ViewData["email"] class="form-control" />
+
+            </div>
+
+            }else{
+              
+                <div class="form-group">
+            <label asp-for="Booking.RoomID" class="control-label"></label>
+            <select asp-for="Booking.RoomID" class="form-control" asp-items="ViewBag.RoomID"></select>
+            </div>
+                <div class="form-group">
+
+                    <input type="hidden" asp-for="Booking.GuestEmail" value=@ViewData["email"] class="form-control" />
+
+                </div>
+            <div class="form-group">
+            <label asp-for="Booking.CheckIn" class="control-label"></label>
+            <input asp-for="Booking.CheckIn" class="form-control" />
+            <span asp-validation-for="Booking.CheckIn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="Booking.CheckOut" class="control-label"></label>
+            <input asp-for="Booking.CheckOut" class="form-control" />
+            <span asp-validation-for="Booking.CheckOut" class="text-danger"></span>
+            </div>
+                <div class="form-group m-2">
+                    @* <label asp-for="Order.TotalPrice" class="control-label"></label> *@
+                    @* Make the type "hidden", and the value = 0 to be in the valid range. *@
+                    <input type="hidden" asp-for="Booking.TotalPrice" value="136" class="form-control" />
+                    @* <span asp-validation-for="Order.TotalPrice" class="text-danger"></span> *@
+                </div>
+            }
+           
+           
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@if (Model.DiffRooms != null)
+{
+    <div>
+        <hr />
+        @if (Model.DiffRooms.Count > 0)
+        {
+            <h4>
+                This room is NOT available for this dates! Please try different dates
+            </h4>
+        }else {
+            <h4>
+                Congratuation! your booked the room with the ID  <strong> ( @Model.Booking.RoomID )</strong> for the date between  <strong>@Model.Booking.CheckIn </strong> and <strong>  @Model.Booking.CheckOut </strong>  for more information please visit My Booking page.
+            </h4>
+        }
+       
+    </div>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

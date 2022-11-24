@@ -1,0 +1,90 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div id="myCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="1500">
+
+    <!-- Indicators -->
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2"></button>
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="3"></button>
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="4"></button>
+    </div>
+
+    <!-- The slideshow -->
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            @* Each img tag should be styled by the 'd-block' class and the 'w-100' class.
+                'd-block' displays the image in block mode.data-bs-interval
+                'w-100' means 100% width, making the image span the entire width of the container.
+            *@
+            <img src="~/images/dining.jpg" class="d-block w-100" alt="BLT Whopper" />
+            <div class="carousel-caption">
+                <h3>
+                    Dining
+                </h3>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="~/images/bar.jpg" class="d-block w-100" alt="Grilled Chicken Burger" />
+            <div class="carousel-caption">
+                <h3>
+                    Bar
+                </h3>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="~/images/bed.jpg" class="d-block w-100" alt="Angus Beef Burger" />
+            <div class="carousel-caption">
+                <h3>
+                    Lodging
+                </h3>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="~/images/table.jpg" class="d-block w-100" alt="Vegetarian Burger" />
+            <div class="carousel-caption">
+                <h3>
+                    Fine Food
+                </h3>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="~/images/pool.jpg" class="d-block w-100" alt="Vegetarian Burger" />
+            <div class="carousel-caption">
+                <h3>
+                    Pool
+                </h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <button type="button" class="carousel-control-prev" data-bs-target="#myCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button type="button" class="carousel-control-next" data-bs-target="#myCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+</div><br>
+
+<div class="row">
+    <div class="col-md-7">
+        <h3>Welcome to the Western Inn</h3>
+        <p>
+            WSU provides opportunities to people of all backgrounds!
+        </p>
+    </div>
+    <div class="col-md-5">
+        <h2>Useful University Links</h2>
+        <ul>
+            <li><a href="https://www.westernsydney.edu.au/">Home Page</a></li>
+            <li><a href="https://www.westernsydney.edu.au/mywestern">My Western</a></li>
+            <li><a href="https://www.cityofparramatta.nsw.gov.au/">Parramatta Council Page</a></li>
+        </ul>
+    </div>
+</div>

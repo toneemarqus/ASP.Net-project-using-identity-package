@@ -1,0 +1,96 @@
+﻿@page
+@model WesternInn_TM_KT_RR.Pages.Rooms.searchModel
+@{
+    ViewData["Title"] = "Search Rooms";
+
+}
+
+<h4>Search available  rooms in specific dates</h4>
+
+<div class="row">
+    <div class="col-md-6">
+        @* by default, a method="post" form will be rendered. *@
+        <form asp-action="roomsDiff">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @* The class m-3 is for Generating some margin between input devices .*@
+            <div class="form-group m-3">
+                <label asp-for="RoomsInput.beds" class="control-label">Number of Beds</label>
+                <select asp-for="RoomsInput.beds" class="form-control" asp-items="Model.rooms"></select>
+                <span asp-validation-for="RoomsInput.beds" class="text-danger"></span>
+            </div>
+            <div class="form-group m-3">
+                <label asp-for="RoomsInput.CheckIn" class="control-label">CheckIn Date</label>
+                <input asp-for="RoomsInput.CheckIn" class="form-control"></input>
+                <span asp-validation-for="RoomsInput.CheckIn" class="text-danger"></span>
+            </div>
+            <div class="form-group m-3">
+                <label asp-for="RoomsInput.CheckOut" class="control-label">CheckOut Date</label>
+                <input asp-for="RoomsInput.CheckOut" class="form-control"></input>
+                <span asp-validation-for="RoomsInput.CheckOut" class="text-danger"></span>
+            </div>
+            <div class="form-group m-3">
+                <input type="submit" value="Search" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@if (Model.DiffRooms != null)
+{
+    <div>
+        <hr />
+        @if (Model.DiffRooms.Count == 0)
+        {
+            <h4>
+                There is no rooms available for this dates! Please try different dates
+            </h4>
+        }
+        else
+        {
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DiffRooms[0].ID)
+
+                    </th>
+                   
+                    <th>
+                        @Html.DisplayNameFor(model => model.DiffRooms[0].BedCount)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DiffRooms[0].Level)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DiffRooms[0].Price)
+                    </th>
+                </tr>
+
+                @foreach (var item in Model.DiffRooms)
+                {
+                    <tr>
+                        <td>
+                            <a href="/Bookings/Create?id=@item.ID&indate=@Model.stime&outdate=@Model.stime2"> @Html.DisplayFor(modelItem => item.ID)</a>
+                            @* <a href="@Url.Page("/Bookings/Create",new { id= @item.ID})">@Html.DisplayFor(modelItem => item.ID)</a>*@
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BedCount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Level)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+    </div>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
